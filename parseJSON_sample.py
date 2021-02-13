@@ -68,11 +68,22 @@ def parseUserData():
             outfile.write('\n')
             line = f.readline()
             count_line+=1
+        print(count_line)
 
 def parseCheckinData():
-    # TO-DO : write code to parse yelp_checkin.JSON
-    pass
-
+    with open('.//yelp_checkin.JSON','r') as f:  
+        outfile =  open('.//checkin.txt', 'w')
+        line = f.readline()
+        count_line = 0
+        #read each JSON abject and extract data
+        while line:
+            data = json.loads(line)
+            outfile.write(str(data['business_id'])+'\t')
+            outfile.write('[' + str(data['date']) + ']')
+            outfile.write('\n')
+            line = f.readline()
+            count_line+=1
+        print(count_line)
 
 def parseTipData():
     # TO-DO : write code to parse yelp_tip.JSON
