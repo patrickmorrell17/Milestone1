@@ -49,7 +49,7 @@ def parseBusinessData():
 # parses the user data into a .txt file to be read into the db
 def parseUserData():
     # TO-DO : write code to parse yelp_user.JSON
-     with open('.//yelp_user.JSON','r') as f:  
+    with open('.//yelp_user.JSON','r') as f:  
         outfile =  open('.//user.txt', 'w')
         line = f.readline()
         count_line = 0
@@ -90,8 +90,22 @@ def parseCheckinData():
         print(count_line)
 
 def parseTipData():
-    # TO-DO : write code to parse yelp_tip.JSON
-    pass
+    with open('.//yelp_tip.JSON','r') as f:  
+        outfile =  open('.//tip.txt', 'w')
+        line = f.readline()
+        count_line = 0
+        #read each JSON abject and extract data
+        while line:
+            data = json.loads(line)
+            outfile.write(str(data['business_id'])+'\t')
+            outfile.write(str(data['date'])+'\t')
+            outfile.write(str(data['likes'])+'\t')
+            outfile.write(str(data['text']) + '\t')
+            outfile.write(str(data['user_id']))
+            outfile.write('\n')
+            line = f.readline()
+            count_line+=1
+        print(count_line)
 
 if __name__ == "__main__":
     parseBusinessData()
