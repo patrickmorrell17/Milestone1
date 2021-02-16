@@ -35,7 +35,7 @@ def parseBusinessData():
             outfile.write('[')
             hours = data["hours"]
             for day in hours:
-                outfile.write('[' + cleanStr4SQL(day) + ': (' + cleanStr4SQL(hours[day])+')]')
+                outfile.write('\'Hours' + cleanStr4SQL(day) + '\':\'' + cleanStr4SQL(hours[day])+'\',')
             outfile.write(']\t') 
 
             outfile.write('\n')
