@@ -93,8 +93,11 @@ def parseCheckinData():
         while line:
             data = json.loads(line)
             outfile.write(str(data['business_id'])+'\t')
-            outfile.write('[' + str(data['date']) + ']')
-            outfile.write('\n')
+            timestamps = str(data['date']).split(',')
+            outfile.write('[')
+            for time in timestamps:
+                outfile.write('(' + time + '),')
+            outfile.write(']\n')
             line = f.readline()
             count_line+=1
         print(count_line)
