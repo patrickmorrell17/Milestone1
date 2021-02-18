@@ -29,8 +29,20 @@ def parseBusinessData():
             outfile.write(str(categories)+'\t')  #category list
             
             # TO-DO : write your own code to process attributes
-            outfile.write(str([]) + "\t")
-            attributes = data['attributes']
+            outfile.write('\n')
+            attributes = data["attributes"]
+            
+            outfile.write('[')
+            for key in attributes:
+                if(type(attributes[key]) == dict):
+                    for key2 in attributes[key]:
+                        outfile.write('(' + cleanStr4SQL(key2) + ', ' + cleanStr4SQL(attributes[key][key2]) + ')')
+                        outfile.write(', ')
+                else:        
+                    outfile.write('(' + cleanStr4SQL(key) + ', ' + cleanStr4SQL(attributes[key]) + ')')
+                    outfile.write(', ')
+            outfile.write(']\t')
+            outfile.write('\n')
             # TO-DO : write your own code to process hours data
             outfile.write('[')
             hours = data["hours"]
