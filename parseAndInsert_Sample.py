@@ -202,6 +202,18 @@ def insert2BusinessTable():
     print(count_line)
     f.close()
 
+
+value = input("Enter database name (default milestone2): ")
+if value != '':
+    DB_NAME = value
+value = input("Enter username (default postgres): ")
+if value != '':
+    USERNAME = value
+value = input("Enter password (default password): ")
+if value != '':
+    PASS = value
+print(DB_NAME + USERNAME + PASS)
+
 print("Inserting to business table")
 insert2BusinessTable()
 print("Inserting to user table")
