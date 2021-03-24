@@ -10,7 +10,7 @@ USERNAME = 'postgres'
 # database name
 DB_NAME = 'milestone2'
 # password
-PASS = 'Sciencetem20'
+PASS = 'password'
 
 
 #  if psycopg2 is not installed, install it using pip installer :  pip install psycopg2  (or pip3 install psycopg2)
