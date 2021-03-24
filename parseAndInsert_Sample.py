@@ -42,13 +42,14 @@ def insert2CheckInTable():
             dates = str(data["date"]).split(",")
             for val in dates:
                 try:
-                    cur.execute("INSERT INTO checkins (businessID,dateOfCheckIn)"
+                    cur.execute("INSERT INTO checkins (businessID,checkintimestamp)"
                                 + " VALUES (%s, %s)",
-                                (data['businessID'],val))
+                                (data['business_id'],val))
                 except Exception as e:
                     print("Insert to checkin failed!", e)
                 conn.commit()
             count_line += 1
+            line = f.readline()
         f.close()
         conn.close()
 
@@ -65,13 +66,14 @@ def insert2TipTable():
         while line:
             data = json.loads(line)
             try:
-                cur.execute("INSERT INTO tipTable (userID,businessID,dateOfTip,textOfTip,likeCount)"
+                cur.execute("INSERT INTO tip (userID,businessID,dateOfTip,textOfTip,likeCount)"
                             + " VALUES (%s, %s, %s, %s, %s)",
-                            (data['user_id'], data["businessID"], data["date"], data["text"], data["likes"]))
+                            (data['user_id'], data["business_id"], data["date"], data["text"], data["likes"]))
             except Exception as e:
-                print("Insert to tipTable failed!", e)
+                print("Insert to tip failed!", e)
             conn.commit()
             count_line += 1
+            line = f.readline()
         f.close()
         conn.close()
 
@@ -99,13 +101,20 @@ def insert2UserTable():
             count_line += 1
             # keeping track of each user's friends (have to insert last)
             frienddict[str(data['user_id'])] = data['friends']
+            line = f.readline()
         print(count_line)
+        print("Inserting into friendship table - WARNING this will take a while")
+        count_line = 0
         for val in frienddict.keys():
-            try:
-                cur.execute("INSERT INTO friendship (firstUserID,secondUserID)"
-                            + " VALUES (%s, %s)", (val, frienddict[val]))
-            except Exception as e:
-                print("Insert to friendship failed!", e)
+            for secondid in frienddict[val]:
+                try:
+                    cur.execute("INSERT INTO friendship (firstUserID,secondUserID)"
+                                + " VALUES (%s, %s)", (val, secondid))
+                except Exception as e:
+                    print("Insert to friendship failed!", e)
+                conn.commit()
+                count_line+=1
+        print(count_line)
         f.close()
         conn.close()
 
@@ -133,22 +142,24 @@ def insert2BusinessTable():
             try:
                 cur.execute("INSERT INTO business (businessID, businessName, businessaddress, businessstate, city, postalCode, latitude, longitude, stars, numOfCheckin, numOfTips, is_open)"
                             + " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                            (data['businessID'], cleanStr4SQL(data["name"]), cleanStr4SQL(data["address"]), data["state"], data["city"], data["postal_code"], data["latitude"], data["longitude"], data["stars"], 0, 0, int2BoolStr(data["is_open"])))
+                            (data['business_id'], cleanStr4SQL(data["name"]), cleanStr4SQL(data["address"]), data["state"], data["city"], data["postal_code"], data["latitude"], data["longitude"], data["stars"], 0, 0, int2BoolStr(data["is_open"])))
             except Exception as e:
-                print("Insert to business failed!", e)
+                #print("Insert to business failed!", e)
+                conn.commit()
+                continue
             conn.commit()
             # getting the attributes
             attributes = data["attributes"]
             # storing the businessID for insertion since it is accessed very often (used as a FK for all the weak relations)
-            bus_id = data['businessID']
+            bus_id = data['business_id']
             for value in attributes:
                 # if nested value, run through all the vals contained in it
-                if value is dict:
-                    for nestedval in value:
+                if type(attributes[value]) == type(dict()):
+                    for nestedval in attributes[value]:
                         try:
                             # will have to change w/ attribute table names
                             cur.execute("INSERT INTO attributes (nameOfAttribute, valueOfAttribute, businessID)" +
-                                        " VALUES (%s, %s, %s)", (nestedval, value[nestedval], bus_id))
+                                        " VALUES (%s, %s, %s)", (nestedval, (attributes[value])[nestedval], bus_id))
                         except Exception as e:
                             print("Insert to attributeTable failed!", e)
                         conn.commit()
@@ -182,6 +193,7 @@ def insert2BusinessTable():
                 conn.commit()
 
             line = f.readline()
+            print(count_line)
             count_line += 1
 
         cur.close()
@@ -190,8 +202,11 @@ def insert2BusinessTable():
     print(count_line)
     f.close()
 
-
+print("Inserting to business table")
 insert2BusinessTable()
+print("Inserting to user table")
 insert2UserTable()
+print("Inserting to tip table")
 insert2TipTable()
+print("Inserting to checkin table - this will take a while")
 insert2CheckInTable()
