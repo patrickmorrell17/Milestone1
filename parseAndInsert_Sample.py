@@ -8,9 +8,9 @@ import psycopg2
 import json
 USERNAME = 'postgres'
 # database name
-DB_NAME = 'milestone2'
+DB_NAME = 'milestone2db'
 # password
-PASS = 'password'
+PASS = '17morrep'
 
 
 #  if psycopg2 is not installed, install it using pip installer :  pip install psycopg2  (or pip3 install psycopg2)

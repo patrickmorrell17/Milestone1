@@ -64,7 +64,7 @@ CREATE TABLE tip(
 CREATE TABLE checkins(
     checkintimestamp TIMESTAMP,
     businessID VARCHAR,
-    PRIMARY KEY(dateOfCheckin,businessID),
+    PRIMARY KEY(checkintimestamp,businessID),
     FOREIGN KEY(businessID) REFERENCES business(businessID)
 );
 
