@@ -17,6 +17,8 @@ namespace part6
         {
             InitializeComponent();
             this.AddState();
+            this.AddColumns2Grid();
+            this.Dock = DockStyle.Fill;
         }
 
         private string BuildConnectionString()
@@ -48,6 +50,31 @@ namespace part6
             {
                 connection.Close();
             }
+        }
+
+        private void AddColumns2Grid()
+        {
+            DataGridViewColumn col1 = new DataGridViewTextBoxColumn();
+            //col1.Bind = new Binding("name");
+            col1.HeaderText = "BusinessName";
+            col1.Width = 255;
+            businessGrid.Columns.Add(col1);
+
+            DataGridViewColumn col2 = new DataGridViewTextBoxColumn();
+            col2.HeaderText = "State";
+            col2.Width = 60;
+            businessGrid.Columns.Add(col2);
+
+            DataGridViewColumn col3 = new DataGridViewTextBoxColumn();
+            col3.HeaderText = "City";
+            col3.Width = 150;
+            businessGrid.Columns.Add(col3);
+
+            DataGridViewColumn col4 = new DataGridViewTextBoxColumn();
+            col4.HeaderText = "ID";
+            col4.Width = 15;
+            businessGrid.Columns.Add(col4);
+
         }
 
         private void stateComboBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -82,6 +109,7 @@ namespace part6
             finally
             {
                 connection.Close();
+                this.addRows2DataGrid1();
             }
         }
 
@@ -116,6 +144,7 @@ namespace part6
             finally
             {
                 connection.Close();
+                this.addRows2DataGrid2();
             }
         }
 
@@ -138,6 +167,141 @@ namespace part6
                 {
 
                     this.businessCatComboBox.Items.Add(reader.GetString(0));
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+                this.addRows2DataGrid3();
+            }
+        }
+
+        private void addRows2DataGrid1()
+        {
+
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID FROM business WHERE"
+                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' ORDER BY businessName";
+            try
+            {
+                this.businessGrid.Rows.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void addRows2DataGrid2()
+        {
+
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID FROM business WHERE"
+                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" + 
+                cityComboBox.SelectedItem.ToString() + "' ORDER BY businessName";
+            try
+            {
+                this.businessGrid.Rows.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void addRows2DataGrid3()
+        {
+
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID FROM business WHERE"
+                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" +
+                cityComboBox.SelectedItem.ToString() + "' AND postalCode = '" +
+                zipcodeComboBox.SelectedItem.ToString() + "' ORDER BY businessName";
+            try
+            {
+                this.businessGrid.Rows.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void businessCatComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT distinct business.businessName, business.businessState, business.city, business.businessID FROM business" +
+                " INNER JOIN categories on categories.businessID = business.businessID WHERE"
+                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" +
+                cityComboBox.SelectedItem.ToString() + "' AND postalCode = '" +
+                zipcodeComboBox.SelectedItem.ToString() + "' AND categories.categoryName = '" + businessCatComboBox.SelectedItem.ToString()  + 
+                "' ORDER BY businessName";
+            try
+            {
+                this.businessGrid.Rows.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+
                 }
             }
 

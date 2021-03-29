@@ -37,8 +37,8 @@ namespace part6
             this.zipCodeLabel = new System.Windows.Forms.Label();
             this.businessCatComboBox = new System.Windows.Forms.ComboBox();
             this.businessCatLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.businessGrid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // stateComboBox
@@ -105,6 +105,7 @@ namespace part6
             this.businessCatComboBox.Name = "businessCatComboBox";
             this.businessCatComboBox.Size = new System.Drawing.Size(121, 24);
             this.businessCatComboBox.TabIndex = 6;
+            this.businessCatComboBox.SelectionChangeCommitted += new System.EventHandler(this.businessCatComboBox_SelectionChangeCommitted);
             // 
             // businessCatLabel
             // 
@@ -116,22 +117,22 @@ namespace part6
             this.businessCatLabel.TabIndex = 7;
             this.businessCatLabel.Text = "Business Categories:";
             // 
-            // dataGridView1
+            // businessGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 180);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(748, 258);
-            this.dataGridView1.TabIndex = 8;
+            this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.businessGrid.Location = new System.Drawing.Point(27, 180);
+            this.businessGrid.Name = "businessGrid";
+            this.businessGrid.RowHeadersWidth = 51;
+            this.businessGrid.RowTemplate.Height = 24;
+            this.businessGrid.Size = new System.Drawing.Size(748, 258);
+            this.businessGrid.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.businessCatLabel);
             this.Controls.Add(this.businessCatComboBox);
             this.Controls.Add(this.zipCodeLabel);
@@ -142,7 +143,7 @@ namespace part6
             this.Controls.Add(this.stateComboBox);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +159,7 @@ namespace part6
         private System.Windows.Forms.Label zipCodeLabel;
         private System.Windows.Forms.ComboBox businessCatComboBox;
         private System.Windows.Forms.Label businessCatLabel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView businessGrid;
     }
 }
 
