@@ -185,9 +185,12 @@ def insert2BusinessTable():
             categories = str(data["categories"]).split(",")
             # inserting the categories
             for value in categories:
+                temp = value
+                if(value[0]==' '):
+                    temp = value[1:]
                 try:
                     cur.execute("INSERT INTO categories (categoryName, businessID)" +
-                                " VALUES (%s, %s)", (value, bus_id))
+                                " VALUES (%s, %s)", (temp, bus_id))
                 except Exception as e:
                     print("Insert to categories failed!", e)
                 conn.commit()
