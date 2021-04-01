@@ -35,9 +35,13 @@ namespace part6
             this.stateLabel = new System.Windows.Forms.Label();
             this.cityLabel = new System.Windows.Forms.Label();
             this.zipCodeLabel = new System.Windows.Forms.Label();
-            this.businessCatComboBox = new System.Windows.Forms.ComboBox();
             this.businessCatLabel = new System.Windows.Forms.Label();
             this.businessGrid = new System.Windows.Forms.DataGridView();
+            this.busCatListBox = new System.Windows.Forms.ListBox();
+            this.busCatbutton = new System.Windows.Forms.Button();
+            this.searchbutton = new System.Windows.Forms.Button();
+            this.currentCategoriesTextBox = new System.Windows.Forms.TextBox();
+            this.currentCatlabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,20 +102,11 @@ namespace part6
             this.zipCodeLabel.TabIndex = 5;
             this.zipCodeLabel.Text = "Zip Code:";
             // 
-            // businessCatComboBox
-            // 
-            this.businessCatComboBox.FormattingEnabled = true;
-            this.businessCatComboBox.Location = new System.Drawing.Point(290, 146);
-            this.businessCatComboBox.Name = "businessCatComboBox";
-            this.businessCatComboBox.Size = new System.Drawing.Size(121, 24);
-            this.businessCatComboBox.TabIndex = 6;
-            this.businessCatComboBox.SelectionChangeCommitted += new System.EventHandler(this.businessCatComboBox_SelectionChangeCommitted);
-            // 
             // businessCatLabel
             // 
             this.businessCatLabel.AutoSize = true;
             this.businessCatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.businessCatLabel.Location = new System.Drawing.Point(63, 142);
+            this.businessCatLabel.Location = new System.Drawing.Point(513, 8);
             this.businessCatLabel.Name = "businessCatLabel";
             this.businessCatLabel.Size = new System.Drawing.Size(198, 25);
             this.businessCatLabel.TabIndex = 7;
@@ -120,21 +115,72 @@ namespace part6
             // businessGrid
             // 
             this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.businessGrid.Location = new System.Drawing.Point(27, 180);
+            this.businessGrid.Location = new System.Drawing.Point(95, 277);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.RowHeadersWidth = 51;
             this.businessGrid.RowTemplate.Height = 24;
             this.businessGrid.Size = new System.Drawing.Size(748, 258);
             this.businessGrid.TabIndex = 8;
+            this.businessGrid.SelectionChanged += new System.EventHandler(this.businessGrid_SelectionChanged);
+            // 
+            // busCatListBox
+            // 
+            this.busCatListBox.FormattingEnabled = true;
+            this.busCatListBox.ItemHeight = 16;
+            this.busCatListBox.Location = new System.Drawing.Point(518, 83);
+            this.busCatListBox.Name = "busCatListBox";
+            this.busCatListBox.Size = new System.Drawing.Size(198, 148);
+            this.busCatListBox.TabIndex = 9;
+            // 
+            // busCatbutton
+            // 
+            this.busCatbutton.Location = new System.Drawing.Point(518, 44);
+            this.busCatbutton.Name = "busCatbutton";
+            this.busCatbutton.Size = new System.Drawing.Size(153, 33);
+            this.busCatbutton.TabIndex = 10;
+            this.busCatbutton.Text = "Add Category";
+            this.busCatbutton.UseVisualStyleBackColor = true;
+            this.busCatbutton.Click += new System.EventHandler(this.busCatbutton_Click);
+            // 
+            // searchbutton
+            // 
+            this.searchbutton.Location = new System.Drawing.Point(316, 240);
+            this.searchbutton.Name = "searchbutton";
+            this.searchbutton.Size = new System.Drawing.Size(302, 31);
+            this.searchbutton.TabIndex = 11;
+            this.searchbutton.Text = "Search";
+            this.searchbutton.UseVisualStyleBackColor = true;
+            // 
+            // currentCategoriesTextBox
+            // 
+            this.currentCategoriesTextBox.Location = new System.Drawing.Point(737, 83);
+            this.currentCategoriesTextBox.Multiline = true;
+            this.currentCategoriesTextBox.Name = "currentCategoriesTextBox";
+            this.currentCategoriesTextBox.Size = new System.Drawing.Size(183, 84);
+            this.currentCategoriesTextBox.TabIndex = 12;
+            // 
+            // currentCatlabel
+            // 
+            this.currentCatlabel.AutoSize = true;
+            this.currentCatlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentCatlabel.Location = new System.Drawing.Point(731, 59);
+            this.currentCatlabel.Name = "currentCatlabel";
+            this.currentCatlabel.Size = new System.Drawing.Size(208, 18);
+            this.currentCatlabel.TabIndex = 13;
+            this.currentCatlabel.Text = "Currently Selected Categories:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(951, 547);
+            this.Controls.Add(this.currentCatlabel);
+            this.Controls.Add(this.currentCategoriesTextBox);
+            this.Controls.Add(this.searchbutton);
+            this.Controls.Add(this.busCatbutton);
+            this.Controls.Add(this.busCatListBox);
             this.Controls.Add(this.businessGrid);
             this.Controls.Add(this.businessCatLabel);
-            this.Controls.Add(this.businessCatComboBox);
             this.Controls.Add(this.zipCodeLabel);
             this.Controls.Add(this.cityLabel);
             this.Controls.Add(this.stateLabel);
@@ -157,9 +203,13 @@ namespace part6
         private System.Windows.Forms.Label stateLabel;
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label zipCodeLabel;
-        private System.Windows.Forms.ComboBox businessCatComboBox;
         private System.Windows.Forms.Label businessCatLabel;
         private System.Windows.Forms.DataGridView businessGrid;
+        private System.Windows.Forms.ListBox busCatListBox;
+        private System.Windows.Forms.Button busCatbutton;
+        private System.Windows.Forms.Button searchbutton;
+        private System.Windows.Forms.TextBox currentCategoriesTextBox;
+        private System.Windows.Forms.Label currentCatlabel;
     }
 }
 

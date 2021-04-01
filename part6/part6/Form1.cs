@@ -13,8 +13,13 @@ namespace part6
 {
     public partial class Form1 : Form
     {
+        List<string> catList;
+
+        StringBuilder catString;
         public Form1()
         {
+            this.catList = new List<string>();
+            this.catString = new StringBuilder();
             InitializeComponent();
             this.AddState();
             this.AddColumns2Grid();
@@ -23,7 +28,7 @@ namespace part6
 
         private string BuildConnectionString()
         {
-            return "Host = localhost; Username = postgres; Database = milestone2db; password = 17morrep";
+            return "Host = localhost; Username = postgres; Database = milestone2b; password = 17morrep";
         }
 
         private void AddState()
@@ -87,12 +92,12 @@ namespace part6
             cmd.CommandText = "SELECT distinct city FROM business WHERE businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' ORDER BY city";
             try
             {
+                this.ClearData();
+                this.busCatListBox.Items.Clear();
                 this.cityComboBox.Items.Clear();
                 this.cityComboBox.Text = " ";
                 this.zipcodeComboBox.Items.Clear();
                 this.zipcodeComboBox.Text = " ";
-                this.businessCatComboBox.Items.Clear();
-                this.businessCatComboBox.Text = " ";
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -124,10 +129,10 @@ namespace part6
                 stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" + cityComboBox.SelectedItem.ToString() + "' ORDER BY postalCode";
             try
             {
+                this.ClearData();
+                this.busCatListBox.Items.Clear();
                 this.zipcodeComboBox.Items.Clear();
                 this.zipcodeComboBox.Text = " ";
-                this.businessCatComboBox.Items.Clear();
-                this.businessCatComboBox.Text = " ";
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -160,13 +165,12 @@ namespace part6
                  zipcodeComboBox.SelectedItem.ToString() + "' ORDER BY categories.categoryName";
             try
             {
-                this.businessCatComboBox.Items.Clear();
-                this.businessCatComboBox.Text = " ";
+                this.ClearData();
+                this.busCatListBox.Items.Clear();
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-
-                    this.businessCatComboBox.Items.Add(reader.GetString(0));
+                    this.busCatListBox.Items.Add(reader.GetString(0));
                 }
             }
 
@@ -281,19 +285,33 @@ namespace part6
             }
         }
 
-        private void businessCatComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void busCatbutton_Click(object sender, EventArgs e)
         {
+            this.catList.Add(this.busCatListBox.SelectedItem.ToString());
+            this.catString.Append(this.busCatListBox.SelectedItem.ToString() + ", ");
+            this.currentCategoriesTextBox.Text = this.catString.ToString();
+            this.addData2Grid4();
+        }
+
+        private void ClearData()
+        {
+            this.catList.Clear();
+            this.catString.Clear();
+            this.currentCategoriesTextBox.Text = "";
+        }
+
+        private void addData2Grid4()
+        {
+            string catString = this.BuildCatagoriesSql();
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT distinct business.businessName, business.businessState, business.city, business.businessID FROM business" +
-                " INNER JOIN categories on categories.businessID = business.businessID WHERE"
-                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" +
-                cityComboBox.SelectedItem.ToString() + "' AND postalCode = '" +
-                zipcodeComboBox.SelectedItem.ToString() + "' AND categories.categoryName = '" + businessCatComboBox.SelectedItem.ToString()  + 
-                "' ORDER BY businessName";
+                " WHERE postalCode = '" +
+                zipcodeComboBox.SelectedItem.ToString() + "' " + catString +
+                " ORDER BY businessName";
             try
             {
                 this.businessGrid.Rows.Clear();
@@ -301,7 +319,6 @@ namespace part6
                 while (reader.Read())
                 {
                     businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
-
                 }
             }
 
@@ -313,6 +330,34 @@ namespace part6
             finally
             {
                 connection.Close();
+            }
+        }
+
+        private string BuildCatagoriesSql()
+        {
+            StringBuilder nstring = new StringBuilder();
+            string and = "AND";
+            for(int i = 0; i < catList.Count(); ++i)
+            {
+                nstring.Append(and);
+                nstring.Append(" business.businessID IN (SELECT categories.businessID FROM categories " + 
+                    "WHERE categories.categoryName = '" + this.catList[i] + "') ");
+            }
+            return nstring.ToString();
+        }
+
+        private void businessGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            int selectedRowCount = businessGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(businessGrid.SelectedRows[0].Cells[0].Value.ToString());
+                sb.Append(", ");
+                sb.Append(businessGrid.SelectedRows[0].Cells[1].Value.ToString());
+                string bid = businessGrid.SelectedRows[0].Cells[3].Value.ToString();
+                Form2 nWin = new Form2(bid);
+                nWin.Show();
             }
         }
     }

@@ -31,3 +31,4 @@ C:\Users\patri\Documents\CptS_451\Milestone2\Milestone1\part6\part6\obj\Debug\pa
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone1\part6\part6\obj\Debug\part6.csproj.CopyComplete
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone1\part6\part6\obj\Debug\part6.exe
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone1\part6\part6\obj\Debug\part6.pdb
+C:\Users\patri\Documents\CptS_451\Milestone2\Milestone1\part6\part6\obj\Debug\part6.Form2.resources

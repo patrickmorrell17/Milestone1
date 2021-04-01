@@ -8,7 +8,7 @@ import psycopg2
 import json
 USERNAME = 'postgres'
 # database name
-DB_NAME = 'milestone2db'
+DB_NAME = 'milestone2b'
 # password
 PASS = '17morrep'
 
