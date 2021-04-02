@@ -157,16 +157,18 @@ def insert2BusinessTable():
                 if type(attributes[value]) == type(dict()):
                     for nestedval in attributes[value]:
                         try:
+                            if((attributes[value])[nestedval]!=False):
                             # will have to change w/ attribute table names
-                            cur.execute("INSERT INTO attributes (nameOfAttribute, valueOfAttribute, businessID)" +
-                                        " VALUES (%s, %s, %s)", (nestedval, (attributes[value])[nestedval], bus_id))
+                                cur.execute("INSERT INTO attributes (nameOfAttribute, valueOfAttribute, businessID)" +
+                                            " VALUES (%s, %s, %s)", (nestedval, (attributes[value])[nestedval], bus_id))
                         except Exception as e:
                             print("Insert to attributeTable failed!", e)
                         conn.commit()
                 else:
                     try:
-                        cur.execute("INSERT INTO attributes (nameOfAttribute, valueOfAttribute, businessID)" +
-                                    " VALUES (%s, %s, %s)", (value, attributes[value], bus_id))
+                        if(attributes[value]!=False):
+                            cur.execute("INSERT INTO attributes (nameOfAttribute, valueOfAttribute, businessID)" +
+                                        " VALUES (%s, %s, %s)", (value, attributes[value], bus_id))
                     except Exception as e:
                         print("Insert to attributes failed!", e)
                     conn.commit()
