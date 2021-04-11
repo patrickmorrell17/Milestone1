@@ -68,7 +68,7 @@ namespace part6
                 {
                     NpgsqlTypes.NpgsqlDate date = reader.GetDate(0);
                     int likeCount = reader.GetInt32(1);
-                    Console.WriteLine(reader.GetDate(0).GetType().ToString());
+                    //Console.WriteLine(reader.GetDate(0).GetType().ToString());
                     tipGrid.Rows.Add(date.ToString(), likeCount.ToString(), reader.GetString(2), reader.GetString(3)); // b s c
                 }
             }
