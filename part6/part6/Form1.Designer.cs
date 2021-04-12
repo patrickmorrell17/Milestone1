@@ -181,7 +181,7 @@ namespace part6
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1253, 528);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "User Information";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -203,7 +203,7 @@ namespace part6
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1253, 528);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Business Search";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
