@@ -18,11 +18,13 @@ CREATE OR REPLACE FUNCTION haversine (lat1 float,lon1 float,lat2 float,lon2 floa
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION haversine (useid int,busid int) RETURNS float as $$
+CREATE OR REPLACE FUNCTION haversine (useid VARCHAR,busid VARCHAR) RETURNS float as $$
 	DECLARE
-		businessloc Business%ROWTYPE:=(SELECT latitude,longitude FROM Business WHERE businessid = busid);
-		userloc UserTable%ROWTYPE:=(SELECT latitude,longitude FROM UserTable WHERE userid = useid);
+		businesslat float:=(SELECT latitude FROM Business WHERE businessid = busid);
+		businesslong float:=(SELECT longitude FROM Business WHERE businessid = busid);
+		userlat float:=(SELECT latitude FROM UserTable WHERE userid = useid);
+		userlong float:=(SELECT longitude FROM UserTable WHERE userid = useid);
 	BEGIN
-		RETURN haversine(userloc.latitude,userloc.longitude,businessloc.latitude,businessloc.longitude);
+		RETURN haversine(userlat,userlong,businesslat,businesslong);
 	END;
 $$ LANGUAGE plpgsql;
