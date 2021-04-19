@@ -94,7 +94,7 @@ def insert2UserTable():
                 # may need to change names in future
                 cur.execute("INSERT INTO usertable (userID,username,averageStars,fans,cool,tipCount,funny,totalTipLikes,useful,latitude,longitude,yelping_Since)"
                             + " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                            (data['user_id'], data["name"], data["average_stars"], data["fans"], data["cool"], 0, data["funny"], 0, 0, 0, 0, data["yelping_since"]))
+                            (data['user_id'], data["name"], data["average_stars"], data["fans"], data["cool"], 0, data["funny"], 0, data['useful'], 0, 0, data["yelping_since"]))
             except Exception as e:
                 print("Insert to usertable failed!", e)
             conn.commit()
