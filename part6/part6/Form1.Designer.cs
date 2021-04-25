@@ -104,6 +104,8 @@ namespace part6
             this.filterByPriceLabel = new System.Windows.Forms.Label();
             this.sortByComboBox = new System.Windows.Forms.ComboBox();
             this.sortByLabel = new System.Windows.Forms.Label();
+            this.editLocButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -311,6 +313,8 @@ namespace part6
             // 
             // userInfoGroupBox
             // 
+            this.userInfoGroupBox.Controls.Add(this.updateButton);
+            this.userInfoGroupBox.Controls.Add(this.editLocButton);
             this.userInfoGroupBox.Controls.Add(this.longTextBox);
             this.userInfoGroupBox.Controls.Add(this.latTextBox);
             this.userInfoGroupBox.Controls.Add(this.longLabel);
@@ -346,7 +350,7 @@ namespace part6
             // 
             // longTextBox
             // 
-            this.longTextBox.Location = new System.Drawing.Point(61, 304);
+            this.longTextBox.Location = new System.Drawing.Point(61, 308);
             this.longTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.longTextBox.Name = "longTextBox";
             this.longTextBox.Size = new System.Drawing.Size(100, 22);
@@ -354,7 +358,7 @@ namespace part6
             // 
             // latTextBox
             // 
-            this.latTextBox.Location = new System.Drawing.Point(53, 276);
+            this.latTextBox.Location = new System.Drawing.Point(61, 274);
             this.latTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.latTextBox.Name = "latTextBox";
             this.latTextBox.Size = new System.Drawing.Size(100, 22);
@@ -363,7 +367,7 @@ namespace part6
             // longLabel
             // 
             this.longLabel.AutoSize = true;
-            this.longLabel.Location = new System.Drawing.Point(25, 304);
+            this.longLabel.Location = new System.Drawing.Point(25, 308);
             this.longLabel.Name = "longLabel";
             this.longLabel.Size = new System.Drawing.Size(39, 17);
             this.longLabel.TabIndex = 21;
@@ -958,6 +962,26 @@ namespace part6
             this.sortByLabel.TabIndex = 39;
             this.sortByLabel.Text = "Sort By:";
             // 
+            // editLocButton
+            // 
+            this.editLocButton.Location = new System.Drawing.Point(167, 273);
+            this.editLocButton.Name = "editLocButton";
+            this.editLocButton.Size = new System.Drawing.Size(75, 23);
+            this.editLocButton.TabIndex = 24;
+            this.editLocButton.Text = "Edit";
+            this.editLocButton.UseVisualStyleBackColor = true;
+            this.editLocButton.Click += new System.EventHandler(this.editLocButton_Click);
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(167, 305);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.TabIndex = 25;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1061,6 +1085,8 @@ namespace part6
         private System.Windows.Forms.Label filterByPriceLabel;
         private System.Windows.Forms.ComboBox sortByComboBox;
         private System.Windows.Forms.Label sortByLabel;
+        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button editLocButton;
     }
 }
 

@@ -24,6 +24,8 @@ namespace part6
             this.AddState();
             this.AddColumns2Grid();
             this.Dock = DockStyle.Fill;
+            this.latTextBox.Enabled = false;
+            this.longTextBox.Enabled = false;
         }
 
         private string BuildConnectionString()
@@ -81,19 +83,24 @@ namespace part6
             businessGrid.Columns.Add(col4);
 
             DataGridViewColumn col5 = new DataGridViewTextBoxColumn();
-            col5.HeaderText = "Stars";
+            col5.HeaderText = "Distance";
             col5.Width = 40;
             businessGrid.Columns.Add(col5);
 
             DataGridViewColumn col6 = new DataGridViewTextBoxColumn();
-            col6.HeaderText = "Number Of Tips";
-            col6.Width = 70;
+            col6.HeaderText = "Stars";
+            col6.Width = 40;
             businessGrid.Columns.Add(col6);
 
             DataGridViewColumn col7 = new DataGridViewTextBoxColumn();
-            col7.HeaderText = "Number of Checkins";
+            col7.HeaderText = "Number Of Tips";
             col7.Width = 70;
             businessGrid.Columns.Add(col7);
+
+            DataGridViewColumn col8 = new DataGridViewTextBoxColumn();
+            col8.HeaderText = "Number of Checkins";
+            col8.Width = 70;
+            businessGrid.Columns.Add(col8);
 
             friendsDataGrid.Columns.Add("col1", "Name");
             friendsDataGrid.Columns.Add("col2", "Total Likes");
@@ -236,7 +243,8 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -271,7 +279,8 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -307,7 +316,8 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -358,7 +368,8 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)); // b s c
+                    businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
+                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
                 }
             }
 
@@ -919,6 +930,45 @@ namespace part6
                     break;
             }
             return cmd;
+        }
+
+        private void editLocButton_Click(object sender, EventArgs e)
+        {
+            this.latTextBox.Enabled = true;
+            this.longTextBox.Enabled = true;
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            string lattitude = this.latTextBox.Text;
+            string longitude = this.longTextBox.Text;
+            string userid = this.UserListBox.SelectedItem.ToString();
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "UPDATE usertable SET longitude = " + longitude.ToString() + 
+                ", latitude = " + lattitude.ToString() + " WHERE userid = '" + userid + "'";
+            try
+            {
+                //this.UserListBox.Items.Clear();
+                var reader = cmd.ExecuteReader();
+                
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+                this.latTextBox.Enabled = false;
+                this.longTextBox.Enabled = false;
+            }
+
         }
     }
 }
