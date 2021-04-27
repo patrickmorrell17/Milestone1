@@ -15,6 +15,8 @@ namespace part6
     {
         List<string> catList;
 
+        string currentUserID;
+
         StringBuilder catString;
         public Form1()
         {
@@ -26,6 +28,7 @@ namespace part6
             this.Dock = DockStyle.Fill;
             this.latTextBox.Enabled = false;
             this.longTextBox.Enabled = false;
+            this.currentUserID = string.Empty;
         }
 
         private string BuildConnectionString()
@@ -402,13 +405,119 @@ namespace part6
             int selectedRowCount = businessGrid.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(businessGrid.SelectedRows[0].Cells[0].Value.ToString());
-                sb.Append(", ");
-                sb.Append(businessGrid.SelectedRows[0].Cells[1].Value.ToString());
+                //StringBuilder sb = new StringBuilder();
+                //sb.Append(businessGrid.SelectedRows[0].Cells[0].Value.ToString());
+                //sb.Append(", ");
+                //sb.Append(businessGrid.SelectedRows[0].Cells[1].Value.ToString());
+                DayOfWeek wk = DateTime.Today.DayOfWeek;
+                string dayOfWeek = wk.ToString();
                 string bid = businessGrid.SelectedRows[0].Cells[3].Value.ToString();
-                Form2 nWin = new Form2(bid);
-                nWin.Show();
+                var connection = new NpgsqlConnection();
+                connection.ConnectionString = this.BuildConnectionString();
+                connection.Open();
+                var cmd = new NpgsqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "SELECT business.businessname, business.businessaddress," +
+                    "businesshours.opentime, businesshours.closetime FROM business " +
+                    "INNER JOIN businesshours ON businesshours.businessid = business.businessid " +
+                    "WHERE business.businessid = '" + bid + "' and " +
+                    "businesshours.dayofweek = '" + dayOfWeek + "'";
+
+
+                try
+                {
+                    //this.businessGrid.Rows.Clear();
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        busNameTextBox.Text = reader.GetString(0);
+                        busAddressTextBox.Text = reader.GetString(1);
+                        busHoursTextBox.Text = "Today(" + dayOfWeek + ") Opens: " + reader.GetString(2) + " Closes: " + reader.GetString(3);
+                    }
+                }
+
+                catch (NpgsqlException ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+                finally
+                {
+                    connection.Close();
+                    this.PopulateBusinessCategories(bid);
+                }
+                //Form2 nWin = new Form2(bid);
+                //nWin.Show();
+            }
+        }
+
+        public void PopulateBusinessCategories(string bid)
+        {
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT categories.categoryname FROM business" +
+                " INNER JOIN categories on categories.businessid = business.businessid" +
+                " where business.businessid = '" + bid + "'";
+            try
+            {
+                this.busAttCatListBox.Items.Clear();
+                this.busAttCatListBox.Items.Add("Categories:");
+                //this.UserListBox.Items.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    
+                    this.busAttCatListBox.Items.Add("   " + reader.GetString(0));
+
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+                this.PopulateBusinessAttr(bid);
+            }
+        }
+
+        public void PopulateBusinessAttr(string bid)
+        {
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT attributes.nameofattribute FROM business" +
+                " INNER JOIN attributes on attributes.businessid = business.businessid" +
+                " where business.businessid = '" + bid + "' AND attributes.valueofattribute = 'True'";
+            try
+            {
+                this.busAttCatListBox.Items.Add("Categories:");
+                //this.UserListBox.Items.Clear();
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    this.busAttCatListBox.Items.Add("   " + reader.GetString(0));
+
+                }
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
             }
         }
 
@@ -447,6 +556,7 @@ namespace part6
         private void setAsCurrentUserButton_Click(object sender, EventArgs e)
         {
             string userid = this.UserListBox.SelectedItem.ToString();
+            this.currentUserID = userid;
             this.PopulateUserFriendGrid(userid);
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();

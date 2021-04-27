@@ -48,6 +48,8 @@ namespace part6
             this.friendsGroupBox = new System.Windows.Forms.GroupBox();
             this.friendsDataGrid = new System.Windows.Forms.DataGridView();
             this.userInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.editLocButton = new System.Windows.Forms.Button();
             this.longTextBox = new System.Windows.Forms.TextBox();
             this.latTextBox = new System.Windows.Forms.TextBox();
             this.longLabel = new System.Windows.Forms.Label();
@@ -79,6 +81,13 @@ namespace part6
             this.CurrentUserTextBox = new System.Windows.Forms.TextBox();
             this.searchUserButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.selectedBusGroupBox = new System.Windows.Forms.GroupBox();
+            this.showTipsButton = new System.Windows.Forms.Button();
+            this.showCheckinsButton = new System.Windows.Forms.Button();
+            this.busAttCatListBox = new System.Windows.Forms.ListBox();
+            this.busHoursTextBox = new System.Windows.Forms.TextBox();
+            this.busAddressTextBox = new System.Windows.Forms.TextBox();
+            this.busNameTextBox = new System.Windows.Forms.TextBox();
             this.breakfastCheckBox = new System.Windows.Forms.CheckBox();
             this.dinnerCheckBox = new System.Windows.Forms.CheckBox();
             this.brunchCheckBox = new System.Windows.Forms.CheckBox();
@@ -104,8 +113,6 @@ namespace part6
             this.filterByPriceLabel = new System.Windows.Forms.Label();
             this.sortByComboBox = new System.Windows.Forms.ComboBox();
             this.sortByLabel = new System.Windows.Forms.Label();
-            this.editLocButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,6 +123,7 @@ namespace part6
             this.userInfoGroupBox.SuspendLayout();
             this.setCurrentUserGroupBox.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.selectedBusGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // stateComboBox
@@ -182,7 +190,7 @@ namespace part6
             // 
             this.businessCatLabel.AutoSize = true;
             this.businessCatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.businessCatLabel.Location = new System.Drawing.Point(692, 17);
+            this.businessCatLabel.Location = new System.Drawing.Point(515, 28);
             this.businessCatLabel.Name = "businessCatLabel";
             this.businessCatLabel.Size = new System.Drawing.Size(198, 25);
             this.businessCatLabel.TabIndex = 7;
@@ -191,7 +199,7 @@ namespace part6
             // businessGrid
             // 
             this.businessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.businessGrid.Location = new System.Drawing.Point(254, 281);
+            this.businessGrid.Location = new System.Drawing.Point(265, 281);
             this.businessGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.businessGrid.Name = "businessGrid";
             this.businessGrid.RowHeadersWidth = 51;
@@ -204,15 +212,15 @@ namespace part6
             // 
             this.busCatListBox.FormattingEnabled = true;
             this.busCatListBox.ItemHeight = 16;
-            this.busCatListBox.Location = new System.Drawing.Point(679, 114);
+            this.busCatListBox.Location = new System.Drawing.Point(514, 105);
             this.busCatListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.busCatListBox.Name = "busCatListBox";
-            this.busCatListBox.Size = new System.Drawing.Size(199, 100);
+            this.busCatListBox.Size = new System.Drawing.Size(199, 164);
             this.busCatListBox.TabIndex = 9;
             // 
             // busCatbutton
             // 
-            this.busCatbutton.Location = new System.Drawing.Point(679, 70);
+            this.busCatbutton.Location = new System.Drawing.Point(514, 63);
             this.busCatbutton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.busCatbutton.Name = "busCatbutton";
             this.busCatbutton.Size = new System.Drawing.Size(153, 33);
@@ -223,18 +231,18 @@ namespace part6
             // 
             // currentCategoriesTextBox
             // 
-            this.currentCategoriesTextBox.Location = new System.Drawing.Point(931, 114);
+            this.currentCategoriesTextBox.Location = new System.Drawing.Point(736, 105);
             this.currentCategoriesTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.currentCategoriesTextBox.Multiline = true;
             this.currentCategoriesTextBox.Name = "currentCategoriesTextBox";
-            this.currentCategoriesTextBox.Size = new System.Drawing.Size(243, 84);
+            this.currentCategoriesTextBox.Size = new System.Drawing.Size(132, 164);
             this.currentCategoriesTextBox.TabIndex = 12;
             // 
             // currentCatlabel
             // 
             this.currentCatlabel.AutoSize = true;
             this.currentCatlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentCatlabel.Location = new System.Drawing.Point(928, 76);
+            this.currentCatlabel.Location = new System.Drawing.Point(685, 76);
             this.currentCatlabel.Name = "currentCatlabel";
             this.currentCatlabel.Size = new System.Drawing.Size(208, 18);
             this.currentCatlabel.TabIndex = 13;
@@ -347,6 +355,26 @@ namespace part6
             this.userInfoGroupBox.TabIndex = 5;
             this.userInfoGroupBox.TabStop = false;
             this.userInfoGroupBox.Text = "User Information";
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(167, 305);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.TabIndex = 25;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
+            // editLocButton
+            // 
+            this.editLocButton.Location = new System.Drawing.Point(167, 273);
+            this.editLocButton.Name = "editLocButton";
+            this.editLocButton.Size = new System.Drawing.Size(75, 23);
+            this.editLocButton.TabIndex = 24;
+            this.editLocButton.Text = "Edit";
+            this.editLocButton.UseVisualStyleBackColor = true;
+            this.editLocButton.Click += new System.EventHandler(this.editLocButton_Click);
             // 
             // longTextBox
             // 
@@ -621,6 +649,7 @@ namespace part6
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.selectedBusGroupBox);
             this.tabPage2.Controls.Add(this.breakfastCheckBox);
             this.tabPage2.Controls.Add(this.dinnerCheckBox);
             this.tabPage2.Controls.Add(this.brunchCheckBox);
@@ -666,6 +695,69 @@ namespace part6
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Business Search";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // selectedBusGroupBox
+            // 
+            this.selectedBusGroupBox.Controls.Add(this.showTipsButton);
+            this.selectedBusGroupBox.Controls.Add(this.showCheckinsButton);
+            this.selectedBusGroupBox.Controls.Add(this.busAttCatListBox);
+            this.selectedBusGroupBox.Controls.Add(this.busHoursTextBox);
+            this.selectedBusGroupBox.Controls.Add(this.busAddressTextBox);
+            this.selectedBusGroupBox.Controls.Add(this.busNameTextBox);
+            this.selectedBusGroupBox.Location = new System.Drawing.Point(905, 17);
+            this.selectedBusGroupBox.Name = "selectedBusGroupBox";
+            this.selectedBusGroupBox.Size = new System.Drawing.Size(533, 258);
+            this.selectedBusGroupBox.TabIndex = 64;
+            this.selectedBusGroupBox.TabStop = false;
+            this.selectedBusGroupBox.Text = "Selected Business";
+            // 
+            // showTipsButton
+            // 
+            this.showTipsButton.Location = new System.Drawing.Point(374, 114);
+            this.showTipsButton.Name = "showTipsButton";
+            this.showTipsButton.Size = new System.Drawing.Size(153, 43);
+            this.showTipsButton.TabIndex = 5;
+            this.showTipsButton.Text = "Show Tips";
+            this.showTipsButton.UseVisualStyleBackColor = true;
+            // 
+            // showCheckinsButton
+            // 
+            this.showCheckinsButton.Location = new System.Drawing.Point(374, 33);
+            this.showCheckinsButton.Name = "showCheckinsButton";
+            this.showCheckinsButton.Size = new System.Drawing.Size(153, 44);
+            this.showCheckinsButton.TabIndex = 4;
+            this.showCheckinsButton.Text = "Show Checkins";
+            this.showCheckinsButton.UseVisualStyleBackColor = true;
+            // 
+            // busAttCatListBox
+            // 
+            this.busAttCatListBox.FormattingEnabled = true;
+            this.busAttCatListBox.ItemHeight = 16;
+            this.busAttCatListBox.Location = new System.Drawing.Point(7, 136);
+            this.busAttCatListBox.Name = "busAttCatListBox";
+            this.busAttCatListBox.Size = new System.Drawing.Size(347, 116);
+            this.busAttCatListBox.TabIndex = 3;
+            // 
+            // busHoursTextBox
+            // 
+            this.busHoursTextBox.Location = new System.Drawing.Point(6, 89);
+            this.busHoursTextBox.Name = "busHoursTextBox";
+            this.busHoursTextBox.Size = new System.Drawing.Size(347, 22);
+            this.busHoursTextBox.TabIndex = 2;
+            // 
+            // busAddressTextBox
+            // 
+            this.busAddressTextBox.Location = new System.Drawing.Point(6, 61);
+            this.busAddressTextBox.Name = "busAddressTextBox";
+            this.busAddressTextBox.Size = new System.Drawing.Size(347, 22);
+            this.busAddressTextBox.TabIndex = 1;
+            // 
+            // busNameTextBox
+            // 
+            this.busNameTextBox.Location = new System.Drawing.Point(7, 33);
+            this.busNameTextBox.Name = "busNameTextBox";
+            this.busNameTextBox.Size = new System.Drawing.Size(347, 22);
+            this.busNameTextBox.TabIndex = 0;
             // 
             // breakfastCheckBox
             // 
@@ -962,26 +1054,6 @@ namespace part6
             this.sortByLabel.TabIndex = 39;
             this.sortByLabel.Text = "Sort By:";
             // 
-            // editLocButton
-            // 
-            this.editLocButton.Location = new System.Drawing.Point(167, 273);
-            this.editLocButton.Name = "editLocButton";
-            this.editLocButton.Size = new System.Drawing.Size(75, 23);
-            this.editLocButton.TabIndex = 24;
-            this.editLocButton.Text = "Edit";
-            this.editLocButton.UseVisualStyleBackColor = true;
-            this.editLocButton.Click += new System.EventHandler(this.editLocButton_Click);
-            // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(167, 305);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 25;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1004,6 +1076,8 @@ namespace part6
             this.setCurrentUserGroupBox.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.selectedBusGroupBox.ResumeLayout(false);
+            this.selectedBusGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1087,6 +1161,13 @@ namespace part6
         private System.Windows.Forms.Label sortByLabel;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button editLocButton;
+        private System.Windows.Forms.GroupBox selectedBusGroupBox;
+        private System.Windows.Forms.TextBox busHoursTextBox;
+        private System.Windows.Forms.TextBox busAddressTextBox;
+        private System.Windows.Forms.TextBox busNameTextBox;
+        private System.Windows.Forms.ListBox busAttCatListBox;
+        private System.Windows.Forms.Button showTipsButton;
+        private System.Windows.Forms.Button showCheckinsButton;
     }
 }
 
