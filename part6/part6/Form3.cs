@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 using Npgsql;
 
 namespace part6
@@ -35,15 +36,17 @@ namespace part6
             connection.Open();
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT to_char(checkintimestamp,'MM') as month FROM checkins WHERE businessid = " + businessID + " ORDER BY month";
+            cmd.CommandText = "SELECT to_char(checkintimestamp,'MM') as month FROM checkins WHERE businessid = '" + businessID + "' ORDER BY month";
             try
             {
                 this.checkinchart.Series.Clear();
+                this.checkinchart.Series.Add("# of Check-ins");
+
                 var reader = cmd.ExecuteReader();
                 int[] count = new int[12];
                 while (reader.Read())
                 {
-                    count[reader.GetInt32(0)] += 1;
+                    count[int.Parse(reader.GetString(0))-1] += 1;
                 }
                 for(int i = 0; i < 12; i++)
                 {
@@ -58,6 +61,38 @@ namespace part6
             {
                 connection.Close();
             }
+        }
+
+        private void btncheckin_Click(object sender, EventArgs e)
+        {
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            DateTime local = DateTime.Now;
+            string datetime = local.ToString();
+            cmd.Connection = connection;
+            cmd.CommandText = "INSERT INTO checkins VALUES ('" + datetime + "','" + businessID + "')";
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch(NpgsqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+            addData2Chart();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form1 form1 = new Form1();
+            form1.Show();
         }
     }
 }

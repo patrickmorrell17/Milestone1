@@ -1088,6 +1088,7 @@ namespace part6
         private void showCheckinsButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            //Form3 form3 = new Form3(businessGrid.SelectedRows[0].Cells[3].Value.ToString());
             Form3 form3 = new Form3("hDD6-yk1yuuRIvfdtHsISg");
             form3.Show();
         }
