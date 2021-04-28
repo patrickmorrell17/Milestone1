@@ -1150,5 +1150,12 @@ namespace part6
             Form2 nWin = new Form2(bid, currentUserID);
             nWin.Show();
         }
+
+        private void showCheckinsButton_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form3 form3 = new Form3(businessGrid.SelectedRows[0].Cells[3].Value.ToString(), this);
+            form3.Show();
+        }
     }
 }

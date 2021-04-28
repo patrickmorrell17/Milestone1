@@ -110,7 +110,7 @@ namespace part6
         {
             NpgsqlTypes.NpgsqlDate date = new NpgsqlTypes.NpgsqlDate();
             date = NpgsqlTypes.NpgsqlDate.Today;
-            string userID = "jRyO2V1pA4CdVVqCIOPc1Q";
+            
             string tipText = this.textBox1.Text;
             int likeCount = 50;
             var connection = new NpgsqlConnection();

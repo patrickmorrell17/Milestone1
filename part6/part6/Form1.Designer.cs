@@ -729,6 +729,7 @@ namespace part6
             this.showCheckinsButton.TabIndex = 4;
             this.showCheckinsButton.Text = "Show Checkins";
             this.showCheckinsButton.UseVisualStyleBackColor = true;
+            this.showCheckinsButton.Click += new System.EventHandler(this.showCheckinsButton_Click);
             // 
             // busAttCatListBox
             // 

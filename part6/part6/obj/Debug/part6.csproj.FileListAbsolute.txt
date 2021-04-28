@@ -66,3 +66,7 @@ C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\o
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\obj\Debug\part6.csproj.CopyComplete
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\obj\Debug\part6.exe
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\obj\Debug\part6.pdb
+C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\bin\Debug\WPFToolkit.dll
+C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\obj\Debug\part6.Form3.resources
