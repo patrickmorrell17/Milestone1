@@ -112,7 +112,7 @@ namespace part6
             date = NpgsqlTypes.NpgsqlDate.Today;
             
             string tipText = this.textBox1.Text;
-            int likeCount = 50;
+            int likeCount = 0;
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
