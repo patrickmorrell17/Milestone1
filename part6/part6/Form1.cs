@@ -1080,5 +1080,18 @@ namespace part6
             }
 
         }
+
+        private void showTipsButton_Click(object sender, EventArgs e)
+        {
+            string bid = businessGrid.SelectedRows[0].Cells[3].Value.ToString();
+            if (string.IsNullOrEmpty(this.currentUserID))
+            {
+                MessageBox.Show("User ID is not currently set!");
+                return;
+            }
+
+            Form2 nWin = new Form2(bid, currentUserID);
+            nWin.Show();
+        }
     }
 }

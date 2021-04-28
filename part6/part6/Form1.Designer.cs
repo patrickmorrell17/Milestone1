@@ -719,6 +719,7 @@ namespace part6
             this.showTipsButton.TabIndex = 5;
             this.showTipsButton.Text = "Show Tips";
             this.showTipsButton.UseVisualStyleBackColor = true;
+            this.showTipsButton.Click += new System.EventHandler(this.showTipsButton_Click);
             // 
             // showCheckinsButton
             // 
