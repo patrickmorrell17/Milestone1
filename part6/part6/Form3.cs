@@ -15,13 +15,15 @@ namespace part6
     public partial class Form3 : Form
     {
         string businessID;
+        Form1 temp;
         private string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September","October","November","December"};
    
-        public Form3(string bid)
+        public Form3(string bid, Form1 form)
         {
             this.businessID = bid;
             InitializeComponent();
             addData2Chart();
+            temp = form;
         }
 
         private string BuildConnectionString()
@@ -90,9 +92,8 @@ namespace part6
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            Form1 form1 = new Form1();
-            form1.Show();
+            this.Close();
+            temp.Show();
         }
     }
 }
