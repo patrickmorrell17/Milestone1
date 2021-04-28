@@ -232,6 +232,7 @@ namespace part6
         {
 
             var connection = new NpgsqlConnection();
+            double distance = 0.0;
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
             var cmd = new NpgsqlCommand();
@@ -246,8 +247,13 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    if (!string.IsNullOrEmpty(this.currentUserID))
+                    {
+                        distance = this.CalculateDistance(currentUserID, reader.GetString(3));
+                    }
+
                     businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
+                        distance, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -269,6 +275,7 @@ namespace part6
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
+            double distance = 0.0;
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID, stars, numoftips, numofcheckin FROM business WHERE"
@@ -282,8 +289,12 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    if (!string.IsNullOrEmpty(this.currentUserID))
+                    {
+                        distance = this.CalculateDistance(currentUserID, reader.GetString(3));
+                    }
                     businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
+                        distance, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -305,6 +316,7 @@ namespace part6
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
+            double distance = 0.0;
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID, stars, numoftips, numofcheckin FROM business WHERE"
@@ -319,8 +331,12 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    if (!string.IsNullOrEmpty(this.currentUserID))
+                    {
+                        distance = this.CalculateDistance(currentUserID, reader.GetString(3));
+                    }
                     businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
+                        distance, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
 
                 }
             }
@@ -357,6 +373,7 @@ namespace part6
             var connection = new NpgsqlConnection();
             connection.ConnectionString = this.BuildConnectionString();
             connection.Open();
+            double distance = 0;
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT distinct business.businessName, business.businessState, business.city, business.businessID, business.stars, business.numoftips, business.numofcheckin FROM business" +
@@ -371,8 +388,13 @@ namespace part6
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    if (!string.IsNullOrEmpty(this.currentUserID))
+                    {
+                        distance = this.CalculateDistance(currentUserID, reader.GetString(3));
+                    }
+                    
                     businessGrid.Rows.Add(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3),
-                        0, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
+                        distance, reader.GetInt32(4).ToString(), reader.GetInt32(5).ToString(), reader.GetInt32(6).ToString()); // b s c
                 }
             }
 
@@ -387,6 +409,41 @@ namespace part6
             }
         }
 
+        public double CalculateDistance(string uid, string busid)
+        {
+            var connection = new NpgsqlConnection();
+            connection.ConnectionString = this.BuildConnectionString();
+            connection.Open();
+            var cmd = new NpgsqlCommand();
+            cmd.Connection = connection;
+            double distance = 0;
+            cmd.CommandText = "SELECT haversine('" + uid + "', '" + busid + "')";
+            // Check if each text box is checked
+            try
+            {
+                
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    distance = reader.GetDouble(0);
+                }
+                connection.Close();
+                return distance;
+            }
+
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            finally
+            {
+                connection.Close();
+               
+            }
+            return distance;
+        }
+        
         private string BuildCatagoriesSql()
         {
             StringBuilder nstring = new StringBuilder();
