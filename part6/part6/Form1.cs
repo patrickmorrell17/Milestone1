@@ -240,7 +240,18 @@ namespace part6
             cmd.CommandText = "SELECT distinct businessName, businessState, city, businessID, stars, numoftips, numofcheckin FROM business WHERE"
                 + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "'"; //stars added
             cmd.CommandText = CheckAttributeFilters(cmd.CommandText);
-            cmd.CommandText = SortBySelector(cmd.CommandText);
+            int SortByDistance = 0;
+            string tempCmd = cmd.CommandText;
+            tempCmd += SortBySelector(cmd.CommandText);
+            //testing if the q was passed
+            if (tempCmd[tempCmd.Length - 1] == 'q')
+            {
+                SortByDistance = 1;
+            }
+            else
+            {
+                cmd.CommandText = SortBySelector(cmd.CommandText);
+            }
             try
             {
                 this.businessGrid.Rows.Clear();
@@ -266,6 +277,13 @@ namespace part6
             finally
             {
                 connection.Close();
+            }
+            if (SortByDistance == 1)
+            {
+                DataGridViewColumn newColumn = businessGrid.Columns[4];
+                ListSortDirection direction = ListSortDirection.Ascending;
+                // If no column has been selected, display an error dialog  box.
+                businessGrid.Sort(newColumn, direction);
             }
         }
 
@@ -282,7 +300,18 @@ namespace part6
                + " businessState = '" + stateComboBox.SelectedItem.ToString().ToUpper() + "' AND city = '" +
                cityComboBox.SelectedItem.ToString() + "'";
             cmd.CommandText = CheckAttributeFilters(cmd.CommandText);
-            cmd.CommandText = SortBySelector(cmd.CommandText);
+            int SortByDistance = 0;
+            string tempCmd = cmd.CommandText;
+            tempCmd += SortBySelector(cmd.CommandText);
+            //testing if the q was passed
+            if (tempCmd[tempCmd.Length - 1] == 'q')
+            {
+                SortByDistance = 1;
+            }
+            else
+            {
+                cmd.CommandText = SortBySelector(cmd.CommandText);
+            }
             try
             {
                 this.businessGrid.Rows.Clear();
@@ -307,6 +336,13 @@ namespace part6
             finally
             {
                 connection.Close();
+            }
+            if (SortByDistance == 1)
+            {
+                DataGridViewColumn newColumn = businessGrid.Columns[4];
+                ListSortDirection direction = ListSortDirection.Ascending;
+                // If no column has been selected, display an error dialog  box.
+                businessGrid.Sort(newColumn, direction);
             }
         }
 
@@ -381,7 +417,18 @@ namespace part6
                 zipcodeComboBox.SelectedItem.ToString() + "' " + catString;
             // Check if each text box is checked
             cmd.CommandText = CheckAttributeFilters(cmd.CommandText);
-            cmd.CommandText = SortBySelector(cmd.CommandText);
+            int SortByDistance = 0;
+            string tempCmd = cmd.CommandText;
+            tempCmd += SortBySelector(cmd.CommandText);
+            //testing if the q was passed
+            if (tempCmd[tempCmd.Length - 1] == 'q')
+            {
+                SortByDistance = 1;
+            }
+            else
+            {
+                cmd.CommandText = SortBySelector(cmd.CommandText);
+            }
             try
             {
                 this.businessGrid.Rows.Clear();
@@ -406,6 +453,13 @@ namespace part6
             finally
             {
                 connection.Close();
+            }
+            if (SortByDistance == 1)
+            {
+                DataGridViewColumn newColumn = businessGrid.Columns[4];
+                ListSortDirection direction = ListSortDirection.Ascending;
+                // If no column has been selected, display an error dialog  box.
+                businessGrid.Sort(newColumn, direction);
             }
         }
 
@@ -1090,6 +1144,7 @@ namespace part6
                     cmd = cmd + "numofcheckin desc";
                     break;
                 case "Nearest":
+                    cmd = cmd + "q";
                     //cmd = cmd + ""
                     break;
                 default:
