@@ -33,7 +33,7 @@ namespace part6
 
         private string BuildConnectionString()
         {
-            return "Host = localhost; Username = postgres; Database = milestone3; password = 17morrep";
+            return "Host = localhost; Username = postgres; Database = milestone2; password = password";
         }
 
         private void AddState()
@@ -1079,6 +1079,17 @@ namespace part6
                 this.longTextBox.Enabled = false;
             }
 
+        }
+
+        private void showTipsButton_Click(object sender, EventArgs e)
+        { 
+        }
+
+        private void showCheckinsButton_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form3 form3 = new Form3("hDD6-yk1yuuRIvfdtHsISg");
+            form3.Show();
         }
     }
 }

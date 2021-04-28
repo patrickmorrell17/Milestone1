@@ -24,7 +24,7 @@ namespace part6
 
         private string BuildConnectionString()
         {
-            return "Host = localhost; Username = postgres; Database = milestone2b; password = 17morrep";
+            return "Host = localhost; Username = postgres; Database = milestone2; password = password";
         }
 
         private void AddColumns2Grid()
