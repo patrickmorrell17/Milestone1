@@ -29,9 +29,9 @@ namespace part6
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnback = new System.Windows.Forms.Button();
             this.btncheckin = new System.Windows.Forms.Button();
             this.checkinchart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -40,10 +40,9 @@ namespace part6
             // 
             // btnback
             // 
-            this.btnback.Location = new System.Drawing.Point(971, 383);
-            this.btnback.Margin = new System.Windows.Forms.Padding(4);
+            this.btnback.Location = new System.Drawing.Point(746, 130);
             this.btnback.Name = "btnback";
-            this.btnback.Size = new System.Drawing.Size(181, 95);
+            this.btnback.Size = new System.Drawing.Size(136, 77);
             this.btnback.TabIndex = 4;
             this.btnback.Text = "Back";
             this.btnback.UseVisualStyleBackColor = true;
@@ -51,10 +50,9 @@ namespace part6
             // 
             // btncheckin
             // 
-            this.btncheckin.Location = new System.Drawing.Point(971, 234);
-            this.btncheckin.Margin = new System.Windows.Forms.Padding(4);
+            this.btncheckin.Location = new System.Drawing.Point(746, 22);
             this.btncheckin.Name = "btncheckin";
-            this.btncheckin.Size = new System.Drawing.Size(181, 95);
+            this.btncheckin.Size = new System.Drawing.Size(136, 77);
             this.btncheckin.TabIndex = 3;
             this.btncheckin.Text = "Check-In";
             this.btncheckin.UseVisualStyleBackColor = true;
@@ -62,30 +60,34 @@ namespace part6
             // 
             // checkinchart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.checkinchart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.checkinchart.Legends.Add(legend3);
-            this.checkinchart.Location = new System.Drawing.Point(33, 41);
+            chartArea1.Name = "ChartArea1";
+            this.checkinchart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.checkinchart.Legends.Add(legend1);
+            this.checkinchart.Location = new System.Drawing.Point(11, 11);
+            this.checkinchart.Margin = new System.Windows.Forms.Padding(2);
             this.checkinchart.Name = "checkinchart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.checkinchart.Series.Add(series3);
-            this.checkinchart.Size = new System.Drawing.Size(901, 437);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.checkinchart.Series.Add(series1);
+            this.checkinchart.Size = new System.Drawing.Size(730, 467);
             this.checkinchart.TabIndex = 5;
             this.checkinchart.Text = "checkinchart";
+            this.checkinchart.Click += new System.EventHandler(this.checkinchart_Click);
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 602);
+            this.ClientSize = new System.Drawing.Size(894, 489);
             this.Controls.Add(this.checkinchart);
             this.Controls.Add(this.btnback);
             this.Controls.Add(this.btncheckin);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.checkinchart)).EndInit();
             this.ResumeLayout(false);
 

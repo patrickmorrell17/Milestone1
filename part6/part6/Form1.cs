@@ -33,7 +33,7 @@ namespace part6
 
         private string BuildConnectionString()
         {
-            return "Host = localhost; Username = postgres; Database = milestone3; password = 17morrep";
+            return "Host = localhost; Username = postgres; Database = milestone2; password = password";
         }
 
         private void AddState()

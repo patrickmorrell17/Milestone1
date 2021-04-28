@@ -70,3 +70,41 @@ C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\b
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\bin\Debug\WPFToolkit.dll
 C:\Users\patri\Documents\CptS_451\Milestone2\Milestone3\Milestone1\part6\part6\obj\Debug\part6.Form3.resources
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\part6.exe.config
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\part6.exe
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\part6.pdb
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\Npgsql.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Buffers.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Memory.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Numerics.Vectors.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Text.Encodings.Web.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Text.Json.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Threading.Channels.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.ValueTuple.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\WPFToolkit.dll
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\Npgsql.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Buffers.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Memory.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Numerics.Vectors.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Text.Encodings.Web.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Text.Json.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Threading.Channels.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\GitHub Projects\Milestone1\part6\part6\bin\Debug\System.ValueTuple.xml
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.csprojAssemblyReference.cache
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.Form1.resources
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.Form2.resources
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.Form3.resources
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.Properties.Resources.resources
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.csproj.GenerateResource.cache
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.csproj.CoreCompileInputs.cache
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.csproj.CopyComplete
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.exe
+F:\GitHub Projects\Milestone1\part6\part6\obj\Debug\part6.pdb

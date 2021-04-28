@@ -27,7 +27,7 @@ namespace part6
 
         private string BuildConnectionString()
         {
-            return "Host = localhost; Username = postgres; Database = milestone3; password = 17morrep";
+            return "Host = localhost; Username = postgres; Database = milestone2; password = password";
         }
 
         private void addData2Chart()
@@ -38,9 +38,12 @@ namespace part6
             var cmd = new NpgsqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT to_char(checkintimestamp,'MM') as month FROM checkins WHERE businessid = '" + businessID + "' ORDER BY month";
+            //hDD6-yk1yuuRIvfdtHsISg
             try
             {
                 this.checkinchart.Series.Clear();
+                this.checkinchart.Legends.Clear();
+                this.checkinchart.Legends.Add("# of Check-ins");
                 this.checkinchart.Series.Add("# of Check-ins");
 
                 var reader = cmd.ExecuteReader();
@@ -53,6 +56,7 @@ namespace part6
                 {
                     this.checkinchart.Series["# of Check-ins"].Points.AddXY(months[i], count[i]);
                 }
+                this.checkinchart.Series["# of Check-ins"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             }
             catch (NpgsqlException e)
             {
@@ -93,6 +97,16 @@ namespace part6
         {
             this.Close();
             temp.Show();
+        }
+
+        private void checkinchart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            temp.Close();
         }
     }
 }
